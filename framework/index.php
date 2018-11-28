@@ -26,7 +26,11 @@ if (DEBUG) {
     ini_set('display_errors', 'Off');
 }
 
+// 加载函数库
 include CORE . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATOR . 'function.php';
-include CORE . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATOR . 'gnaf.php';
+// 加载入口类
+include CORE . DIRECTORY_SEPARATOR . 'gnaf.php';
+
+spl_autoload_register('\core\gnaf::load');
 
 \core\gnaf::run();
