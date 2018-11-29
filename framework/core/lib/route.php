@@ -17,13 +17,13 @@ class route
         if (isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI'] != '/') {
             $path = $_SERVER['REQUEST_URI'];
             $patharr = explode('/', trim($path, '/'));
-            if (isset($patharr[0])) {
-                $this->ctrl = $patharr[0];
-                unset($patharr[0]);
+            if (isset($patharr[2])) {
+                $this->ctrl = $patharr[2];
+                unset($patharr[2]);
             }
-            if (isset($patharr[1])) {
-                $this->action = $patharr[1];
-                unset($patharr[1]);
+            if (isset($patharr[3])) {
+                $this->action = $patharr[3];
+                unset($patharr[3]);
             } else {
                 $this->action = 'index';
             }

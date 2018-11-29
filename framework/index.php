@@ -17,6 +17,7 @@ define('GNAF', realpath('.' . DIRECTORY_SEPARATOR));
 define('CORE', GNAF . DIRECTORY_SEPARATOR . 'core');
 // app业务逻辑
 define('APP', GNAF . DIRECTORY_SEPARATOR . 'app');
+define('MODULE', 'app');
 
 define('DEBUG', true);
 

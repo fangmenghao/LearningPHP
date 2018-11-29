@@ -18,8 +18,18 @@ class gnaf
      */
     public static function run()
     {
-        p('启动');
-        new lib\route();
+        $route = new lib\route();
+        $controllerClass = $route->ctrl;
+        $action = $route->action;
+        $controller = APP . DIRECTORY_SEPARATOR . 'controller' . DIRECTORY_SEPARATOR . ucfirst($controllerClass) . 'Controller.php';
+        $obj = '\\' . MODULE . '\controller\\' . ucfirst($controllerClass) . 'Controller';
+        if (is_file($controller)){
+            include_once $controller;
+            $ctrl = new $obj();
+            $ctrl->$action();
+        }else{
+            throw new \Exception('找不到控制器' . $controllerClass);
+        }
     }
 
     /**
