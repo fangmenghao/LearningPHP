@@ -7,11 +7,13 @@
  * Date: 2018/11/27
  * Time: 20:05
  */
+
 namespace core;
 
 class gnaf
 {
     public static $classMap = array();
+    public $assign;
 
     /**
      * 启动函数
@@ -23,11 +25,11 @@ class gnaf
         $action = $route->action;
         $controller = APP . DIRECTORY_SEPARATOR . 'controller' . DIRECTORY_SEPARATOR . ucfirst($controllerClass) . 'Controller.php';
         $obj = '\\' . MODULE . '\controller\\' . ucfirst($controllerClass) . 'Controller';
-        if (is_file($controller)){
+        if (is_file($controller)) {
             include_once $controller;
             $ctrl = new $obj();
             $ctrl->$action();
-        }else{
+        } else {
             throw new \Exception('找不到控制器' . $controllerClass);
         }
     }
@@ -50,6 +52,26 @@ class gnaf
             self::$classMap[$class] = $class;
         } else {
             return false;
+        }
+    }
+
+    /**
+     * 为视图赋值数据
+     */
+    public function assign($name, $value)
+    {
+        $this->assign[$name] = $value;
+    }
+
+    /**
+     * 展示视图
+     */
+    public function display($file)
+    {
+        $file = APP . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . $file;
+        if (is_file($file)) {
+            extract($this->assign);
+            include $file;
         }
     }
 }

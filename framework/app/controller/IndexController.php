@@ -7,9 +7,10 @@
  */
 namespace app\controller;
 
-class IndexController
+class IndexController extends \core\gnaf
 {
     public function index() {
-        p('it\'s index controller');
+        $this->assign('data', 'Gnaf');
+        $this->display('index.html');
     }
 }
